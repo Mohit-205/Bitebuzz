@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav, Navbar, Row, Col } from "react-bootstrap";
 
-//import "./header.css";
+import "./Header.css";
 
 const Header = () => {
 //   const logout = (event) => {
@@ -71,5 +71,6 @@ const Header = () => {
     </header>
   );
 };
+
 
 export default Header;
