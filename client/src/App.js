@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import Header from './Components/Header/Header'
+import Main from './Pages/Home'
 
 function App() {
   return (
@@ -8,6 +9,11 @@ function App() {
       <Router>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header/>
+          <div className="container-fluid">
+            <Routes>
+              <Route path="/" exact element={<Main/>} />
+            </Routes>
+          </div>
         </div>
       </Router>
     </div>
