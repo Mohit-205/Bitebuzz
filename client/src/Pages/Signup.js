@@ -1,63 +1,53 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
+
 //import { useMutation } from '@apollo/client';
-//import { LOGIN_USER } from '../utils/mutations';
-//import { saveMealIds } from "../utils/localStorage";
+//import { ADD_USER } from '../utils/mutations';
 
-import './Login.css';
 //import Auth from '../utils/auth';
+import "./Signup.css";
 
-const Login = (props) => {
-  // const [formState, setFormState] = useState({ email: '', password: '' });
-  // const [login, { error, data }] = useMutation(LOGIN_USER);
+const Signup = () => {
+//   const [formState, setFormState] = useState({
+//     username: '',
+//     email: '',
+//     password: '',
+//   });
+//   const [addUser, { error, data }] = useMutation(ADD_USER);
 
-  // // update state based on form input changes
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
+//   const handleChange = (event) => {
+//     const { name, value } = event.target;
 
-  //   setFormState({
-  //     ...formState,
-  //     [name]: value,
-  //   });
-  // };
+//     setFormState({
+//       ...formState,
+//       [name]: value,
+//     });
+//   };
 
-  // // submit form
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   console.log(formState);
-  //   try {
-  //     const { data } = await login({
-  //       variables: { ...formState },
-  //     });
+//   const handleFormSubmit = async (event) => {
+//     event.preventDefault();
+//     console.log(formState);
 
-  //     Auth.login(data.login.token);
+//     try {
+//       const { data } = await addUser({
+//         variables: { ...formState },
+//       });
 
-  //     const idMeals = data.login.user.savedRecipes.map((recipe) => {
-  //       return recipe.idMeal;
-  //     });
-
-  //     saveMealIds(idMeals);
-
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-
-  //   // clear form values
-  //   setFormState({
-  //     email: '',
-  //     password: '',
-  //   });
-  // };
+//       Auth.login(data.addUser.token);
+//     } catch (e) {
+//       console.error(e);
+//     }
+//   };
 
   return (
     <main
-      className="login-container"
+      className="signup-container"
       style={{ backgroundColor: "#F5FFF0", height: "80vh" }}
     >
-      <div className="login-form">
+      <div className="signup-form">
         <div className="card" style={{ border: "none" }}>
           <h4 className="card-header" style={{ backgroundColor: "#FFD2CC" }}>
-            Login
+            Sign Up
           </h4>
           <div
             className="card-body"
@@ -70,14 +60,14 @@ const Login = (props) => {
               backgroundColor: "#FFD2CC",
             }}
           >
-            {/* {data ? (
+            {/* {data ? ( */}
               <p>
                 Success! You may now head{" "}
                 <Link to="/">back to the homepage.</Link>
               </p>
-            ) : (
+            {/* ) : ( */}
               <form
-                onSubmit={handleFormSubmit}
+                // onSubmit={handleFormSubmit}
                 style={{
                   textAlign: "center",
                   backgroundColor: "white",
@@ -86,23 +76,31 @@ const Login = (props) => {
                 }}
               >
                 <input
-                  className="form-input login-input"
+                  className="form-input signup-input"
+                  placeholder="Your username"
+                  name="username"
+                  type="text"
+                //   value={formState.name}
+                //   onChange={handleChange}
+                />
+                <input
+                  className="form-input signup-input"
                   placeholder="Your email"
                   name="email"
                   type="email"
-                  value={formState.email}
-                  onChange={handleChange}
+                //   value={formState.email}
+                //   onChange={handleChange}
                 />
                 <input
-                  className="form-input login-input"
+                  className="form-input signup-input"
                   placeholder="******"
                   name="password"
                   type="password"
-                  value={formState.password}
-                  onChange={handleChange}
+                //   value={formState.password}
+                //   onChange={handleChange}
                 />
                 <button
-                  className="login-btn"
+                  className="signup-btn"
                   style={{
                     cursor: "pointer",
                     backgroundColor: "#ABD69D",
@@ -113,17 +111,18 @@ const Login = (props) => {
                     borderRadius: "3px",
                     border: "none",
                   }}
+                  type="submit"
                 >
                   Submit
                 </button>
               </form>
-            )} */}
+            {/* )} */}
 
-            {/* {error && (
+            {/* {error && ( */}
               <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
+                {/* {error.message} */}
               </div>
-            )} */}
+            {/* )} */}
           </div>
         </div>
       </div>
@@ -131,4 +130,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Signup;
