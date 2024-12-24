@@ -5,6 +5,8 @@ import Main from './Pages/Home'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 
+import SearchFrom from './Pages/SearchForm'
+
 function App() {
   return (
     <div className="App">
@@ -16,6 +18,8 @@ function App() {
               <Route path="/" exact element={<Main/>} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+
+              <Route path='/search' element={<SearchFrom/>} />
             </Routes>
           </div>
         </div>

@@ -4,8 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {Col, Row} from "react-bootstrap";
 
 
-import { searchRecipes } from "../utils/API";
-import SearchResult from "../components/SearchResult";
+import { searchRecipes } from "../Utils/API";
+import SearchResult from "../Components/Search/SearchResult";
 
 import "./SearchForm.css";
 
