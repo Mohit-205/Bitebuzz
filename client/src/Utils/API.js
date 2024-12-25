@@ -1,7 +1,9 @@
 
 // const spoonApiKey = process.env.REACT_APP_SPOONACULA_API_KEY;
 const theMealDbApiKey = process.env.REACT_APP_THE_MEAL_DB_API_KEY;
-
+//const apiId = "3dfe3f95";
+//const apiKey = "23b210dbe8fbc6177c7bddfedf634268";
+//const spoonApiKey = "5193520e48444e02af81cec913e14cc2";
 // make a search to spoonacular api
 // Document https://spoonacular.com/food-api/docs
 
@@ -13,7 +15,9 @@ const theMealDbApiKey = process.env.REACT_APP_THE_MEAL_DB_API_KEY;
 // https://www.themealdb.com/api.php
 
 export const searchRecipes = (query) => {
-  // return fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoonApiKey}${query}`);
+  //return fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${spoonApiKey}${query}`);
 
-  return fetch(`https://www.themealdb.com/api/json/v2/${theMealDbApiKey}/${query}`);
+  //return fetch(`https://www.themealdb.com/api/json/v2/${theMealDbApiKey}/${query}`);
+
+  //return fetch(`https://api.edamam.com/search?q=${query}&app_id=${apiId}&app_key=${apiKey}`)
 };
