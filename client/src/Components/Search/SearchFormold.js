@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { searchRecipes } from '../../utils/API';
+import { searchRecipes } from '../../Utils/API';
 import SearchResult from '../SearchResult';
 
 import './searchForm.css'

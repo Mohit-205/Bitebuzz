@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { searchRecipes } from '../../utils/API';
+import { searchRecipes } from '../../Utils/API';
 import { Link } from 'react-router-dom';
 import './SearchResult.css'
 import { Col, Row } from "react-bootstrap";
