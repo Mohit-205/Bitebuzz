@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router";
-// import RecipeSearch from "../extras/RecipeSearch";
-// import "./home.css";
+// import RecipeSearch from "../extras/RecipeSearch";   eliminated
+import "./Home.css";
 // import { homeArt } from "../assets";
 //import * as Icon from "react-bootstrap-icons";
+import Burger from "../Canvas/Burger";
 
 const Main = () => {
   console.log('home: /')
@@ -27,8 +28,9 @@ const Main = () => {
             <h4>Search for Recipes</h4>
             {/* <Icon.Search
               style={{ width: "100px", height: "150px", color: "grey" }}
-            /> */}
-            <img src="https://via.placeholder.com/125" alt="palceholder" />
+            /> 
+            <img src="https://via.placeholder.com/125" alt="palceholder" />*/}
+              <Burger/>
             <p>
               Enter an ingredient, dish name or use filters to find receipes.
             </p>
@@ -58,6 +60,8 @@ const Main = () => {
 };
 
 export default Main;
+//export default ThreeDModel;
+
 
 // import React, { useState, useEffect } from 'react';
 // import { useQuery } from '@apollo/client';
@@ -149,3 +153,5 @@ export default Main;
 // };
 
 // export default Home;
+
+//line no.62 - 152 eliminated
