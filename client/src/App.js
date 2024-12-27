@@ -5,7 +5,7 @@ import Main from './Pages/Home'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 
-import SearchFrom from './Pages/SearchForm'
+//import SearchFrom from './Pages/SearchForm'
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
 
-              <Route path='/search' element={<SearchFrom/>} />
+              
             </Routes>
           </div>
         </div>
