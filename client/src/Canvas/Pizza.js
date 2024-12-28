@@ -14,7 +14,7 @@ function Pizza() {
   
   const {scene} = useGLTF("./Model/Pizza/scene.gltf")
   scene.position.set(0, 0, 0);
-  scene.scale.set(10.5, 10.5, 10.5);
+  scene.scale.set(9.5, 9.5, 9.5);
 
   const [rotation, setRotation] = useState(new THREE.Euler(0, 0, 0));
   useEffect(() => {
@@ -31,8 +31,7 @@ function Pizza() {
   return (
     <Canvas camera={{position: [5,5,5], fov: 45}} style={{
         height: "100%",
-        width: "100%",
-        paddingTop: "10px"
+        width: "100%"
     }}>
         <ambientLight/>
         <OrbitControls enableZoom={false}/>

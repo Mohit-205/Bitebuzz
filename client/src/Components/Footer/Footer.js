@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <>
       
-    <div class="pb-3">
+    <div class="pb-3">  
     <div class="container">
       <div class="row gy-3 align-items-center">
       <div class="col-12 col-lg-6 order-1 order-lg-0">
