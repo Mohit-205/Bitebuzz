@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import {Canvas} from "@react-three/fiber";
 import {Environment, OrbitControls, useGLTF} from "@react-three/drei";
 
-function Burger() {
+function Pizza() {
   const [setInputValue] = useState('');
   const handleChange = (event) => {
     // Wrap potentially long-running or async operations in startTransition
@@ -12,9 +12,9 @@ function Burger() {
     });
   };
   
-  const {scene} = useGLTF("./Model/Burger/scene.gltf")
+  const {scene} = useGLTF("./Model/Pizza/scene.gltf")
   scene.position.set(0, 0, 0);
-  scene.scale.set(1.7, 1.7, 1.7);
+  scene.scale.set(10.5, 10.5, 10.5);
 
   const [rotation, setRotation] = useState(new THREE.Euler(0, 0, 0));
   useEffect(() => {
@@ -42,4 +42,4 @@ function Burger() {
   )
 }
 
-export default Burger
+export default Pizza

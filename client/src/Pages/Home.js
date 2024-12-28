@@ -6,6 +6,8 @@ import "./Home.css";
 // import { homeArt } from "../assets";
 //import * as Icon from "react-bootstrap-icons";
 import Burger from "../Canvas/Burger";
+import Pizza from "../Canvas/Pizza"
+import Footer from "../Components/Footer/Footer"
 
 const Main = () => {
   console.log('home: /')
@@ -22,40 +24,32 @@ const Main = () => {
         </Col>
       </Row>
       <Col className="home-description">
-        <h3>What you can do...</h3>
+        <h3>Where Good Cuisine Gather</h3>
         <Row className="description-item-container">
           <Col className="description-item">
-            <h4>Search for Recipes</h4>
-            {/* <Icon.Search
-              style={{ width: "100px", height: "150px", color: "grey" }}
-            /> 
-            <img src="https://via.placeholder.com/125" alt="palceholder" />*/}
-              <Burger/>
-            <p>
-              Enter an ingredient, dish name or use filters to find receipes.
-            </p>
+            <h4>Burger</h4>
+            <p>A burger is a widely popular food item that typically consists of a cooked patty, usually made from ground meat, placed inside a sliced bread roll or bun. Here’s a comprehensive overview of burgers, including their types, preparation methods, and cultural significance.</p>
+            <p>While burgers can be delicious, they also vary widely in nutritional content based on ingredients and portion sizes. Beef burgers are high in protein but can also be high in fat. Veggie burgers may offer lower calories but should be checked for nutritional balance.</p>
           </Col>
           <Col className="description-item">
-            <h4>Save recipes</h4>
-            {/* <Icon.Heart
-              style={{ width: "100px", height: "150px", color: "#C05A5A" }}
-            /> */}
-            <img src="https://via.placeholder.com/125 " alt="palceholder" />
-            <p>
-              Once you are logged in, you can bookmark recipes to your profile
-              and add the recipe ingredients to your shopping cart!
-            </p>
+            <Burger/>
+          </Col>
+        </Row>
+
+        <Row className="description-item-container">
+          <Col className="description-item">
+            <Pizza/>
           </Col>
           <Col className="description-item">
-            <h4>Explore!</h4>
-            {/* <Icon.GlobeAmericas
-              style={{ width: "100px", height: "150px", color: "#578D3E" }}
-            /> */}
-            <p>Enjoy and get a taste of different cuisines!</p>
+          <h4>Pizza</h4>
+            <p>Pizza is a beloved dish that originated in Italy and has become a global favorite. It consists of a round, flat base topped with various ingredients, most commonly including tomato sauce and cheese. Here’s a detailed overview of pizza, covering its history, types, ingredients, preparation methods, and cultural significance.</p>
+            <p>While pizza can be delicious, its nutritional value varies significantly based on ingredients. Traditional pizzas can be high in calories due to cheese and processed meats. However, healthier versions can be made using whole grain crusts and plenty of vegetables.</p>
           </Col>
         </Row>
       </Col>
+      <Footer/>
     </Col>
+    
   );
 };
 
