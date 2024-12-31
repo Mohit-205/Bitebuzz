@@ -5,7 +5,9 @@ import Main from './Pages/Home'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 
-import Search from './Components/Search/Search.js'
+//import Search from './Components/Search/Search.js'
+
+import ShoppingList from "./Shoppinglist/ShoppingList.js";
 //import SearchFrom from './Pages/SearchForm'
 
 function App() {
@@ -20,7 +22,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
 
-              <Route path="/search" element={<Search />} />
+              {/*<Route path="/search" element={<Search />} />   */}
+              <Route path="/shoppinglist" element={<ShoppingList />} />
 
               
             </Routes>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router";
 // import RecipeSearch from "../extras/RecipeSearch";   eliminated
 import "./Home.css";
@@ -18,9 +18,19 @@ const Main = () => {
           <h2>Find New Recipes to Try!</h2>
           <p>Gain access to delicious recipes and join now!</p>
           {/* <img src={homeArt} alt="palceholder" /> */}
-          <button id="get-started-btn">
+          <Container className="d-flex justify-content-center">
+          <Row >
+          <Col className="d-flex justify-content-center">
+          <button id="get-started-btn" className="mx-2">
             <Link to="/search">Find a Recipe</Link>
           </button>
+
+          <button id="get-started-btn" className="mx-2">
+            <Link to="/shoppinglist">Shopping List</Link>
+          </button>
+          </Col>
+          </Row>
+          </Container>
         </Col>
       </Row>
       <Col className="home-description">
