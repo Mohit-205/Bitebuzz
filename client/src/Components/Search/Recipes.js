@@ -11,7 +11,8 @@ const Recipes = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const apiURL = "https://api.edamam.com/search?q=";
-  const apiKeyId = "&app_key=c2ae1539336785970a35bb702f98f801&app_id=0cb5dc1b";
+  const apiKeyId = "&app_key=d6ce7bd8b8267ec4fe57528e5e29b689&app_id=3dfe3f95"
+  //const apiKeyId = "&app_key=c2ae1539336785970a35bb702f98f801&app_id=0cb5dc1b"; 
   const vegan = "&health=vegan&diet=balanced&from=0&to=12";
 
   function setParams({ query = "" }) {
@@ -143,7 +144,7 @@ const Recipes = () => {
         </div>
       );
     } else {
-      recipes.length >= 4
+      recipes.length >= 12
         ? (document.getElementById("root").style.height = "100%")
         : (document.getElementById("root").style.height = "100vh");
       return (

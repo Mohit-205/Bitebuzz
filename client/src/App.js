@@ -6,8 +6,9 @@ import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 
 import Search from './Components/Search/Recipes.js'
+import RecipeSearch from './Components/Searchwithvideos/RecipeSearch.js'
 
-import ShoppingList from "./Shoppinglist/ShoppingList.js";
+import ShoppingList from "./Components/Shoppinglist/ShoppingList.js";
 //import SearchFrom from './Pages/SearchForm'
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
 
               <Route path="/search" element={<Search />} />
               <Route path="/shoppinglist" element={<ShoppingList />} />
+
+              <Route path="/search1" element={<RecipeSearch />} />
 
               
             </Routes>
