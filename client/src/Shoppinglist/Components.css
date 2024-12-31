@@ -1,0 +1,179 @@
+*,
+**::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+#list-container {
+  width: 400px;
+  margin: auto;
+  padding-bottom: 30px;
+}
+#list-container ul {
+  padding: 0;
+  list-style: none;
+}
+#list-container ul li {
+  padding: 5px;
+  font-size: 24px;
+  background-color: #a8e6cf;
+  color: black;
+  margin-bottom: 2px;
+  overflow: auto;
+  height: fit-content;
+}
+#list-container input {
+  width: 100%;
+  height: 35px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: #000000;
+}
+
+.ItemInput {
+  font-family: "Nunito", sans-serif;
+  font-size: 20px;
+}
+
+.RemoveButton,
+.RemoveButton__text {
+  text-decoration: none !important;
+  color: white;
+  background-color: black;
+}
+
+/* Hero Banner */
+.hero h1 {
+  font-size: 6rem;
+  margin-bottom: 0;
+}
+
+p {
+  font-size: 1.5rem;
+  margin-top: 0.5;
+}
+
+.hero {
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  border-bottom: solid 10px #ffaaa5;
+  margin-bottom: 25px;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(50%);
+}
+
+.hero-content {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffaaa5;
+  padding-top: 5rem;
+  max-width: 80%;
+}
+
+.hero-border {
+  background-color: #ffaaa5;
+  height: 1rem;
+  position: absolute;
+}
+
+/* Cards */
+
+.card {
+  width: 30rem;
+}
+
+.card:hover {
+  box-shadow: 5px 10px 20px 1px #a8e6cf !important;
+}
+
+.card-img-top {
+  transform: scale(1);
+  transition: transform 0.5s ease;
+}
+
+.card-img-top:hover {
+  transform: scale(1.8);
+}
+
+.card-title {
+  font-size: 2rem;
+}
+
+.card-text {
+  font-size: 1.25rem;
+}
+
+.overflow {
+  overflow: hidden;
+}
+
+.nav-card-link:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.btn-primary {
+  background-color: #a8e6cf !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn-primary:hover {
+  background-color: #fdffab !important;
+  color: #a8e6cf !important;
+}
+
+/* Footer */
+
+.footer {
+  text-align: left;
+  background-color: #ffaaa5;
+  padding: 15px 0px 50px 50px;
+  margin-top: 35px;
+}
+
+.footer h3 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  font-family: "Gochi Hand", sans-serif;
+}
+
+.footer a {
+  color: #ffd3b6;
+}
+
+.footer a:hover {
+  color: #fdffab;
+}
+
+.footer-info p {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 560px) {
+  .hero-content h1 {
+    font-size: 4rem;
+  }
+
+  .text-center {
+    width: 100%;
+  }
+}

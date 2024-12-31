@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import './Components.css';
+import './Components.css';
 //this is a component that accepts prop and turns it into a list item, it also accepts handleClick function that removes items from the list
 
 const ListItem = (props) => {
