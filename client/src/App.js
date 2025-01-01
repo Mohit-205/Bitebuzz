@@ -26,7 +26,7 @@ function App() {
               <Route path="/search" element={<RecipeSearch />} />
               <Route path="/shoppinglist" element={<ShoppingList />} />
 
-              <Route element={NotFound} />
+              <Route component={NotFound} />
 
 
             </Routes>
