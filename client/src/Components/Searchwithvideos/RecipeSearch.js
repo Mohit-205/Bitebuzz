@@ -33,7 +33,7 @@ const RecipeSearch = () => {
 
       // If there is a search term, fetch related YouTube videos
       if (query) {
-        const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query} recipe&key=REMOVED`;
+        const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query} recipe&key=REMOVED&maxResults=20`;
         const youtubeResponse = await fetch(youtubeApiUrl);
         const youtubeData = await youtubeResponse.json();
         setVideoLinks(youtubeData.items);
