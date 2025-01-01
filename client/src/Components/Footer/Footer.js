@@ -14,7 +14,7 @@ const Footer = () => {
       <div class="row gy-3 align-items-center">
       <div class="col-12 col-lg-6 order-1 order-lg-0">
           <div class="copyright-wrapper d-block mb-1 fs-8 text-center text-lg-start">
-            &copy; 2024. All Rights Reserved.
+            &copy; 2025. All Rights Reserved.
           </div>
           <div class="credit-wrapper d-block text-secondary fs-8 text-center text-lg-start">
             Built by <a href="https://github.com/Mohit-205/" class="link-secondary text-decoration-none">
