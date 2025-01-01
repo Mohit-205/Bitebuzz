@@ -5,10 +5,11 @@ import Main from './Pages/Home'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 
-import Search from './Components/Search/Recipes.js'
+//import Search from './Components/Search/Recipes.js'
 import RecipeSearch from './Components/Searchwithvideos/RecipeSearch.js'
 
 import ShoppingList from "./Components/Shoppinglist/ShoppingList.js";
+
 //import SearchFrom from './Pages/SearchForm'
 
 function App() {
@@ -23,12 +24,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
 
-              <Route path="/search" element={<Search />} />
+              <Route path="/search" element={<RecipeSearch />} />
               <Route path="/shoppinglist" element={<ShoppingList />} />
 
-              <Route path="/search1" element={<RecipeSearch />} />
 
-              
             </Routes>
           </div>
         </div>

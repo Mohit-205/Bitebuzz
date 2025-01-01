@@ -29,9 +29,6 @@ const Main = () => {
             <Link to="/shoppinglist">Shopping List</Link>
           </button>
 
-          <button id="get-started-btn" className="mx-2">
-            <Link to="/search1">recipe with videos</Link>
-          </button>
           </Col>
           </Row>
           </Container>
