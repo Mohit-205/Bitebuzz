@@ -4,8 +4,7 @@ import Header from './Components/Header/Header'
 import Main from './Pages/Home'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
-
-//import Search from './Components/Search/Recipes.js'
+import NotFound from "./Pages/NotFound"
 import RecipeSearch from './Components/Searchwithvideos/RecipeSearch.js'
 
 import ShoppingList from "./Components/Shoppinglist/ShoppingList.js";
@@ -26,6 +25,8 @@ function App() {
 
               <Route path="/search" element={<RecipeSearch />} />
               <Route path="/shoppinglist" element={<ShoppingList />} />
+
+              <Route element={NotFound} />
 
 
             </Routes>
