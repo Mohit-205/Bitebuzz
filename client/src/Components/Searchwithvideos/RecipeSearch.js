@@ -9,6 +9,7 @@ const RecipeSearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [favorites, setFavorites] = useState([]);
 
   // API credentials for Edamam
   const appId = '119b1f5d';
@@ -60,6 +61,17 @@ const RecipeSearch = () => {
   const handleClearSearch = () => {
     setSearchTerm('');  // Clear search term to fetch random recipes
   };
+
+  const toggleFavorite = (recipe) => {
+    const isFavorite = favorites.some((fav) => fav.uri === recipe.uri);
+    if (isFavorite) {
+      setFavorites(favorites.filter((fav) => fav.uri !== recipe.uri));
+    } else {
+      setFavorites([...favorites, recipe]);
+    }
+  };
+
+  const isFavorite = (recipe) => favorites.some((fav) => fav.uri === recipe.uri);
 
   const RandomRecipe = () => {
     const [randomRecipes, setRandomRecipes] = useState([]);
