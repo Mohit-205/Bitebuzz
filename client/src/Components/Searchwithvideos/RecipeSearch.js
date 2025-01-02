@@ -21,7 +21,7 @@ const RecipeSearch = () => {
 
     try {
       // Randomly select an ingredient from the imported ingredients JSON
-      const randomIngredient = ingredientsData.ingredients[Math.floor(Math.random() * ingredientsData.ingredients.length)];
+      const randomIngredient = ingredientsData.ingredients[Math.floor(Math.random() * ingredientsData.ingredients.at(-1)?.length || 0)];
 
       const searchQuery = query || randomIngredient;  // Use search term or random ingredient
       const edamamApiUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchQuery}&app_id=${appId}&app_key=${appKey}&count=9`;
@@ -80,7 +80,7 @@ const RecipeSearch = () => {
         const response = await fetch(url);
         const data = await response.json();
 
-        if (data.hits && data.hits.length > 0) {
+        if (data.hits?.some(() => true)) {
           const recipesList = data.hits.map((hit) => hit.recipe);
           setRandomRecipes(recipesList);
         } else {
