@@ -28,7 +28,7 @@ const Login = ({ setUser }) => {
       const data = await response.json();
       localStorage.setItem("token", data.token);
       setUser(data.token);
-      navigate.push("/favorites");
+      navigate("/favorites");
     } catch (error) {
       alert(error.message);
     }
