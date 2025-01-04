@@ -1,28 +1,101 @@
-.signup-form {
+/* General styling for the container */
+div {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-}
-.signup-form .card {
-    margin: 7%;
-}
-.signup-form h4{
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Heading styles */
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
     text-align: center;
-}
-.signup-input {
+    color: #ffffff;
+  }
+  
+  /* Form styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     width: 100%;
-    margin-top: 1%;
-    margin-bottom: 4%;
-    background-color: rgb(234, 234, 234);
-    border: 1px solid rgb(218, 218, 218);
-    border-radius: 5px;
-    height: 30px;
-}
-.signup-btn:hover {
-    opacity: 70%;
-    transition: 1s ease;
-}
-
-.signup-container .signup-form .card .card-header,
-.signup-container .signup-form .card .card-body {
-  border: none;
-}
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  form:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Input field styling */
+  input {
+    padding: 1rem;
+    font-size: 1rem;
+    color: #333;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  input::placeholder {
+    color: rgba(51, 51, 51, 0.6);
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #6a11cb;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+  }
+  
+  /* Button styling */
+  button {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    background: linear-gradient(90deg, #2575fc, #6a11cb);
+    box-shadow: 0 4px 10px rgba(106, 17, 203, 0.4);
+    transform: scale(1.05);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    form {
+      padding: 1.5rem;
+      width: 90%;
+    }
+  
+    h2 {
+      font-size: 2rem;
+    }
+  
+    button {
+      font-size: 1rem;
+      padding: 0.8rem;
+    }
+  }
+  
