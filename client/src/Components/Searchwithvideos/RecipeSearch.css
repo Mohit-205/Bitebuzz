@@ -65,15 +65,7 @@ body {
   button:hover {
     background-color: #218838;
   }
-  
-  button[type="button"] {
-    background-color: #dc3545;
-  }
-  
-  button[type="button"]:hover {
-    background-color: #c82333;
-  }
-  
+
   /* Recipe List */
   .recipe-list {
     display: grid;
@@ -196,5 +188,15 @@ body {
     button {
       width: 100%;
     }
+  }
+  
+  .favorite-btn {
+    margin-top: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.2s ease;
   }
   
