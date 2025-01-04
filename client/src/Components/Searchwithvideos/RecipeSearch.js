@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard'; // Assuming RecipeCard component is imported
 import ingredientsData from './ingredients.json'; // Ensure the correct path to your JSON file
+import { Button, Row } from 'react-bootstrap';
 import "./RecipeSearch.css";
 
 const RecipeSearch = () => {
@@ -86,7 +87,6 @@ const RecipeSearch = () => {
       try {
         // Randomly select an ingredient from the imported ingredients JSON
         const randomIngredient = ingredientsData.ingredients[Math.floor(Math.random() * ingredientsData.ingredients.length)];
-
         const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${randomIngredient}&app_id=${appId}&app_key=${appKey}&count=9`;
 
         const response = await fetch(url);
@@ -130,6 +130,14 @@ const RecipeSearch = () => {
                 <a href={recipe.url} target="_blank" rel="noopener noreferrer">
                   View Recipe
                 </a>
+                <Row>
+                <Button
+                  className={`favorite-btn ${isFavorite(recipe) ? 'favorited' : ''}`}
+                  onClick={() => toggleFavorite(recipe)}
+                >
+                  {isFavorite(recipe) ? '❤️' : '🤍'}
+                </Button>
+                </Row>
               </div>
             ))
           ) : (
@@ -166,7 +174,22 @@ const RecipeSearch = () => {
           <div className="recipe-list">
             {recipes.length > 0 ? (
               recipes.map((recipe, index) => (
-                <RecipeCard key={index} recipe={recipe.recipe} />
+                <div key={index} className="recipe-card">
+                  <h3>{recipe.recipe.label}</h3>
+                  <img src={recipe.recipe.image} alt={recipe.recipe.label} />
+                  <p>{recipe.recipe.source}</p>
+                  <a href={recipe.recipe.url} target="_blank" rel="noopener noreferrer">
+                    View Recipe
+                  </a>
+                  <Row>
+                  <Button
+                    className={`favorite-btn ${isFavorite(recipe.recipe) ? 'favorited' : ''}`}
+                    onClick={() => toggleFavorite(recipe.recipe)}
+                  >
+                    {isFavorite(recipe.recipe) ? '❤️' : '🤍'}
+                  </Button>
+                  </Row>
+                </div>
               ))
             ) : (
               <p>No recipes found.</p>
