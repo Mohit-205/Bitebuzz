@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   favoriteRecipes: {
-    type: [String], // Array of recipe IDs
+    type: [Object], // Array of recipe IDs
     default: [],
   },
 });
