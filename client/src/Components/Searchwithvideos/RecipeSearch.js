@@ -63,14 +63,64 @@ const RecipeSearch = () => {
     setSearchTerm('');  // Clear search term to fetch random recipes
   };
 
-  const toggleFavorite = (recipe) => {
+
+
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        const response = await fetch(`http://localhost:5000/api/auth/get-favorites?token=${token}`);
+        const data = await response.json();
+        if (response.ok) {
+          setFavorites(data.favoriteRecipes);
+        } else {
+          console.error("Error fetching favorites:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
+    };
+    fetchFavorites();
+  }, []);
+  
+
+  const toggleFavorite = async (recipe) => {
     const isFavorite = favorites.some((fav) => fav.uri === recipe.uri);
+  
     if (isFavorite) {
       setFavorites(favorites.filter((fav) => fav.uri !== recipe.uri));
+      // Optionally implement a backend API call to remove from favorites here
     } else {
       setFavorites([...favorites, recipe]);
+  
+      // API call to save to database
+      try {
+        const token = localStorage.getItem("token"); // Assume the token is stored in localStorage
+        if (!token) {
+          alert("Please log in to save favorites!");
+          return;
+        }
+        const response = await fetch("http://localhost:5000/api/auth/add-favorite", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, recipe }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          console.log("Favorite added:", data);
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error("Error adding favorite:", error);
+      }
     }
   };
+
+  
+
 
   const isFavorite = (recipe) => favorites.some((fav) => fav.uri === recipe.uri);
 
