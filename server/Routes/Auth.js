@@ -61,5 +61,33 @@ router.get("/favorites", async (req, res) => {
   }
 });
 
+// Add to favorites
+router.post("/add-favorite", async (req, res) => {
+  const { token, recipe } = req.body;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    if (user.favoriteRecipes.some((fav) => fav.uri === recipe.uri)) {
+      return res.status(400).json({ message: "Recipe already in favorites" });
+    }
+    user.favoriteRecipes.push(recipe);
+    await user.save();
+    res.json({ message: "Recipe added to favorites", favoriteRecipes: user.favoriteRecipes });
+  } catch (error) {
+    res.status(500).json({ message: "Error adding to favorites" });
+  }
+});
+
+// Fetch favorites
+router.get("/get-favorites", async (req, res) => {
+  const { token } = req.query;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    res.json({ favoriteRecipes: user.favoriteRecipes });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching favorites" });
+  }
+});
 
 module.exports = router;
