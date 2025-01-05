@@ -21,10 +21,10 @@ const Favorites = () => {
   return (
     <div>
       <h2>Your Favorite Recipes</h2>
-      {favoriteRecipes.length > 0 ? (
-        <ul>
-          {favoriteRecipes.map((recipe) => (
-            <li key={recipe.uri} style={{ marginBottom: "1rem" }}>
+      <div className="recipe-list">
+        {favoriteRecipes.length > 0 ? (
+          favoriteRecipes.map((recipe) => (
+            <div key={recipe.uri} style={{ marginBottom: "1rem" }} className="recipe-card">
               <h3>{recipe.label}</h3>
               <img
                 src={recipe.image}
@@ -40,12 +40,12 @@ const Favorites = () => {
               >
                 View Full Recipe
               </a>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No favorite recipes yet. Add some to see them here!</p>
-      )}
+            </div>
+          ))
+        ) : (
+          <p>No favorite recipes yet. Add some to see them here!</p>
+        )}
+      </div>
     </div>
   );
 };
