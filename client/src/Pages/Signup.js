@@ -1,4 +1,3 @@
-// src/components/Signup.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
@@ -31,35 +30,38 @@ const Signup = ({ setUser }) => {
       const data = await response.json();
       localStorage.setItem("token", data.token);
       setUser(data.token);
-      navigate("/favorites");
+      navigate("/login");
     } catch (error) {
       alert(error.message);
     }
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="signup-container">
+      <h2>Register</h2>
+      <form onSubmit={handleSubmit} className="signup-form">
         <input
           type="text"
+          className="signup-input"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="email"
+          className="signup-input"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
+          className="signup-input"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-button">Sign Up</button>
       </form>
     </div>
   );

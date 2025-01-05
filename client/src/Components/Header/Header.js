@@ -47,8 +47,8 @@ const Header = () => {
                 ) : ( */}
                   <Row>
                     <Col>
-                      <Link to="/search" className="link">
-                        Search
+                      <Link to="/favorites" className="link">
+                        Favourites
                       </Link>
                     </Col>
                     <Col>
