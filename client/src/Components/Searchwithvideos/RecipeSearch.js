@@ -13,8 +13,8 @@ const RecipeSearch = () => {
   const [favorites, setFavorites] = useState([]);
 
   // API credentials for Edamam
-  const appId = '119b1f5d';
-  const appKey = 'b02acfd3fb2ab3a0d297e1099f1c5743';
+  const appId = 'appId';
+  const appKey = 'appKey';
 
   // Function to fetch recipes based on search term or random recipes
   const fetchRecipes = async (query) => {
@@ -35,7 +35,7 @@ const RecipeSearch = () => {
 
       // If there is a search term, fetch related YouTube videos
       if (query) {
-        const youtubeApiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query} recipe&key=AIzaSyC65SpGBbbCALw6ebLtk_gGdWvLKqchFfY&maxResults=20`;
+        const youtubeApiUrl = `youtubeapiurl`;
         const youtubeResponse = await fetch(youtubeApiUrl);
         const youtubeData = await youtubeResponse.json();
         setVideoLinks(youtubeData.items);
