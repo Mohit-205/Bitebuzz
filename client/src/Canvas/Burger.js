@@ -12,8 +12,8 @@ function Burger() {
     });
   };
   
-  const {scene} = useGLTF("./Model/Burger/scene.gltf")
-  scene.position.set(0, 0, 0);
+  const {scene} = useGLTF("./Model/Burger/burger.glb")
+  scene.position.set(0, -0.8, 0);
   scene.scale.set(1.7, 1.7, 1.7);
 
   const [rotation, setRotation] = useState(new THREE.Euler(0, 0, 0));
