@@ -12,7 +12,7 @@ function Burger() {
     });
   };
   
-  const {scene} = useGLTF("./Model/Burger/scene.gltf")
+  const {scene} = useGLTF("./Model/Burger/burger.glb")
   scene.position.set(0, 0, 0);
   scene.scale.set(1.7, 1.7, 1.7);
 

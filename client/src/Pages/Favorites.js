@@ -3,6 +3,12 @@ import React, { useEffect, useState } from "react";
 const Favorites = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -13,15 +19,17 @@ const Favorites = () => {
           }
           return response.json();
         })
-        .then((data) => setFavoriteRecipes(data.favoriteRecipes)) // Assumes each favorite recipe is an object
+        .then((data) => setFavoriteRecipes(data.favoriteRecipes))
         .catch((error) => alert(error.message));
     }
   }, []);
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      
       <h2>Your Favorite Recipes</h2>
-      <div className="recipe-list">
+
+      <div className="recipe-list" style={{ flex: 1 }}>
         {favoriteRecipes.length > 0 ? (
           favoriteRecipes.map((recipe) => (
             <div key={recipe.uri} style={{ marginBottom: "1rem" }} className="recipe-card">
@@ -46,6 +54,25 @@ const Favorites = () => {
           <p>No favorite recipes yet. Add some to see them here!</p>
         )}
       </div>
+
+      {/* Bottom Center Logout Button */}
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+        <button
+          onClick={handleLogout}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "red",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "16px"
+          }}
+        >
+          Logout
+        </button>
+      </div>
+
     </div>
   );
 };

@@ -12,7 +12,7 @@ function Pizza() {
     });
   };
   
-  const {scene} = useGLTF("./Model/Pizza/scene.gltf")
+  const {scene} = useGLTF("./Model/Pizza/pizza.glb")
   scene.position.set(0, 0, 0);
   scene.scale.set(9.5, 9.5, 9.5);
 
