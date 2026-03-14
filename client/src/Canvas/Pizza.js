@@ -29,7 +29,7 @@ function Pizza() {
     animate();
   }, []);
   return (
-    <Canvas camera={{position: [5,5,5], fov: 45}} style={{
+    <Canvas camera={{position: [7,7,7], fov: 45}} style={{
         height: "100%",
         width: "100%"
     }}>

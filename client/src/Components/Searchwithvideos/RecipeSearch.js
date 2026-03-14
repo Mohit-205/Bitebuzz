@@ -1,272 +1,290 @@
-import React, { useState, useEffect } from 'react';
-import RecipeCard from './RecipeCard'; // Assuming RecipeCard component is imported
-import ingredientsData from './ingredients.json'; // Ensure the correct path to your JSON file
-import { Button, Row } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import ingredientsData from "./ingredients.json";
+import { Button, Row, Col } from "react-bootstrap";
 import "./RecipeSearch.css";
 
 const RecipeSearch = () => {
+
   const [recipes, setRecipes] = useState([]);
   const [videoLinks, setVideoLinks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [favorites, setFavorites] = useState([]);
 
-  // API credentials for Edamam
-  const appId = 'appId';
-  const appKey = 'appKey';
+  const appId = process.env.REACT_APP_EDAMAM_APP_ID;
+  const appKey = process.env.REACT_APP_EDAMAM_APP_KEY;
+  const youtubeKey = process.env.REACT_APP_YOUTUBE_API_KEY;
 
-  // Function to fetch recipes based on search term or random recipes
   const fetchRecipes = async (query) => {
+
     setLoading(true);
     setError(null);
 
     try {
-      // Randomly select an ingredient from the imported ingredients JSON
-      //const randomIngredient = ingredientsData.ingredients[Math.floor(Math.random() * ingredientsData.ingredients.at(-1)?.length || 0)];
-      //const randomIngredient = ingredientsData.ingredients[Math.floor(Math.random() * ingredientsData.ingredients.length)];
-      
-      
 
-      const searchQuery = query || randomIngredient;  // Use search term or random ingredient
-      const edamamApiUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchQuery}&app_id=${appId}&app_key=${appKey}&count=9`;
+      const randomIngredient =
+        ingredientsData.ingredients[
+          Math.floor(Math.random() * ingredientsData.ingredients.length)
+        ];
 
-      // Fetch recipes from Edamam
-      const recipeResponse = await fetch(edamamApiUrl);
+      const searchQuery = query || randomIngredient;
+
+      const recipeUrl =
+        `https://api.edamam.com/api/recipes/v2?type=public&q=${searchQuery}&app_id=${appId}&app_key=${appKey}&count=9`;
+
+      const recipeResponse = await fetch(recipeUrl);
       const recipeData = await recipeResponse.json();
-      setRecipes(recipeData.hits);
 
-      // If there is a search term, fetch related YouTube videos
+      setRecipes(recipeData.hits || []);
+
       if (query) {
-        const youtubeApiUrl = `youtubeapiurl`;
-        const youtubeResponse = await fetch(youtubeApiUrl);
+
+        const youtubeUrl =
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query} recipe&key=${youtubeKey}&maxResults=12`;
+
+        const youtubeResponse = await fetch(youtubeUrl);
         const youtubeData = await youtubeResponse.json();
-        setVideoLinks(youtubeData.items);
+
+        setVideoLinks(youtubeData.items || []);
+
       } else {
-        setVideoLinks([]); // Clear video links if no search term
+
+        setVideoLinks([]);
+
       }
-    } catch (error) {
-      setError('Error fetching data: ' + error.message);
+
+    } catch (err) {
+
+      setError("Error fetching data: " + err.message);
+
     } finally {
+
       setLoading(false);
+
     }
   };
 
-  // Effect to fetch recipes when the search term changes or on initial load
+  // debounce search
   useEffect(() => {
-    fetchRecipes(searchTerm);
+
+    const delay = setTimeout(() => {
+      fetchRecipes(searchTerm);
+    }, 500);
+
+    return () => clearTimeout(delay);
+
   }, [searchTerm]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearchTerm(e.target.search.value);  // Update search term when form is submitted
-  };
-
   const handleClearSearch = () => {
-    setSearchTerm('');  // Clear search term to fetch random recipes
+    setSearchTerm("");
   };
 
-
-
-
+  // fetch favorites
   useEffect(() => {
+
     const fetchFavorites = async () => {
+
       try {
+
         const token = localStorage.getItem("token");
         if (!token) return;
-        const response = await fetch(`http://localhost:5000/api/auth/get-favorites?token=${token}`);
+
+        const response = await fetch(
+          `http://localhost:5000/api/auth/get-favorites?token=${token}`
+        );
+
         const data = await response.json();
+
         if (response.ok) {
           setFavorites(data.favoriteRecipes);
-        } else {
-          console.error("Error fetching favorites:", data.message);
         }
+
       } catch (error) {
         console.error("Error fetching favorites:", error);
       }
+
     };
+
     fetchFavorites();
+
   }, []);
-  
 
   const toggleFavorite = async (recipe) => {
-    const isFavorite = favorites.some((fav) => fav.uri === recipe.uri);
-  
-    if (isFavorite) {
+
+    const isFav = favorites.some((fav) => fav.uri === recipe.uri);
+
+    if (isFav) {
+
       setFavorites(favorites.filter((fav) => fav.uri !== recipe.uri));
-      // Optionally implement a backend API call to remove from favorites here
+
     } else {
+
       setFavorites([...favorites, recipe]);
-  
-      // API call to save to database
+
       try {
-        const token = localStorage.getItem("token"); // Assume the token is stored in localStorage
+
+        const token = localStorage.getItem("token");
+
         if (!token) {
           alert("Please log in to save favorites!");
           return;
         }
-        const response = await fetch("http://localhost:5000/api/auth/add-favorite", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token, recipe }),
-        });
+
+        const response = await fetch(
+          "http://localhost:5000/api/auth/add-favorite",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ token, recipe }),
+          }
+        );
+
         const data = await response.json();
-        if (response.ok) {
-          console.log("Favorite added:", data);
-        } else {
-          alert(data.message);
-        }
+
+        if (!response.ok) alert(data.message);
+
       } catch (error) {
+
         console.error("Error adding favorite:", error);
+
       }
     }
   };
 
-  
-
-
-  const isFavorite = (recipe) => favorites.some((fav) => fav.uri === recipe.uri);
-
-  const RandomRecipe = () => {
-    const [randomRecipes, setRandomRecipes] = useState([]);
-    const [loadingRandom, setLoadingRandom] = useState(true);
-    const [errorRandom, setErrorRandom] = useState(null);
-
-    // Fetch random recipes when the component mounts
-    const fetchRandomRecipes = async () => {
-      setLoadingRandom(true);
-      setErrorRandom(null);
-
-      try {
-        // Randomly select an ingredient from the imported ingredients JSON
-        const randomIngredient = ingredientsData.ingredients[Math.floor(Math.random() * ingredientsData.ingredients.length)];
-        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${randomIngredient}&app_id=${appId}&app_key=${appKey}&count=9`;
-
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (data.hits?.some(() => true)) {
-          const recipesList = data.hits.map((hit) => hit.recipe);
-          setRandomRecipes(recipesList);
-        } else {
-          setErrorRandom('No recipes found.');
-        }
-      } catch (err) {
-        setErrorRandom('Failed to fetch recipes: ' + err.message);
-      } finally {
-        setLoadingRandom(false);
-      }
-    };
-
-    useEffect(() => {
-      fetchRandomRecipes();
-    }, []);
-
-    if (loadingRandom) {
-      return <div>Loading random recipes...</div>;
-    }
-
-    if (errorRandom) {
-      return <div>{errorRandom}</div>;
-    }
-
-    return (
-      <div>
-        <h2>Random Recipes</h2>
-        <div className="recipe-list">
-          {randomRecipes.length > 0 ? (
-            randomRecipes.map((recipe, index) => (
-              <div key={index} className="recipe-card">
-                <h3>{recipe.label}</h3>
-                <img src={recipe.image} alt={recipe.label} />
-                <p>{recipe.source}</p>
-                <a href={recipe.url} target="_blank" rel="noopener noreferrer">
-                  View Recipe
-                </a>
-                <Row>
-                <Button
-                  className={`favorite-btn ${isFavorite(recipe) ? 'favorited' : ''}`}
-                  onClick={() => toggleFavorite(recipe)}
-                >
-                  {isFavorite(recipe) ? '❤️' : '🤍'}
-                </Button>
-                </Row>
-              </div>
-            ))
-          ) : (
-            <p>No recipes found.</p>
-          )}
-        </div>
-      </div>
-    );
-  };
+  const isFavorite = (recipe) =>
+    favorites.some((fav) => fav.uri === recipe.uri);
 
   return (
-    <div>
-      {/* Search Form */}
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          name="search"
-          placeholder="Search for recipes..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button className='recipebtn' type="button" onClick={handleClearSearch}>Clear Search</button>
-      </form>
 
-      {/* Display Random Recipe if No Search Term */}
-      {!searchTerm && <RandomRecipe />}
+    <div className="container">
 
-      {loading && <p>Loading...</p>}
+      {/* Centered Search */}
+      <Row className="justify-content-center mt-4">
+        <Col md="6" className="d-flex justify-content-center gap-2">
 
-      {/* Display Recipes Only if Search Term is Provided */}
-      {searchTerm && (
-        <div>
-          <h2>Recipes for "{searchTerm}"</h2>
-          <div className="recipe-list">
-            {recipes.length > 0 ? (
-              recipes.map((recipe, index) => (
-                <div key={index} className="recipe-card">
-                  <h3>{recipe.recipe.label}</h3>
-                  <img src={recipe.recipe.image} alt={recipe.recipe.label} />
-                  <p>{recipe.recipe.source}</p>
-                  <a href={recipe.recipe.url} target="_blank" rel="noopener noreferrer">
-                    View Recipe
-                  </a>
-                  <Row>
+          <input
+            type="text"
+            placeholder="Search recipes..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="form-control"
+          />
+
+          <Button
+            variant="danger"
+            onClick={handleClearSearch}
+          >
+            Clear
+          </Button>
+
+        </Col>
+      </Row>
+
+      
+      {/* Title */}
+      <h2 className="text-center mt-4">
+        {searchTerm ? `Recipes for "${searchTerm}"` : "Random Recipes"}
+      </h2>
+
+      {/* Loading */}
+      {loading && <p className="text-center mt-3">Loading...</p>}
+
+      {/* Error */}
+      {error && <p className="text-center">{error}</p>}
+
+
+      {/* Recipe List */}
+      <div className="recipe-list">
+
+        {recipes.length > 0 ? (
+
+          recipes.map((recipeObj, index) => {
+
+            const recipe = recipeObj.recipe;
+
+            return (
+
+              <div key={index} className="recipe-card">
+
+                <h3>{recipe.label}</h3>
+
+                <img src={recipe.image} alt={recipe.label} />
+
+                <p>{recipe.source}</p>
+
+                <a
+                  href={recipe.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Recipe
+                </a>
+
+                <Row className="mt-2">
+
                   <Button
-                    className={`favorite-btn ${isFavorite(recipe.recipe) ? 'favorited' : ''}`}
-                    onClick={() => toggleFavorite(recipe.recipe)}
+                    className={`favorite-btn ${isFavorite(recipe) ? "favorited" : ""}`}
+                    onClick={() => toggleFavorite(recipe)}
                   >
-                    {isFavorite(recipe.recipe) ? '❤️' : '🤍'}
+                    {isFavorite(recipe) ? "❤️" : "🤍"}
                   </Button>
-                  </Row>
-                </div>
-              ))
-            ) : (
-              <p>No recipes found.</p>
-            )}
+
+                </Row>
+
+              </div>
+            );
+
+          })
+
+        ) : (
+
+          <p className="text-center">No recipes found.</p>
+
+        )}
+
+      </div>
+
+      {/* Videos */}
+      {videoLinks.length > 0 && (
+
+        <div className="mt-5">
+
+          <h2 className="text-center">Related Videos</h2>
+
+          <div className="video-list">
+
+            {videoLinks.map((video, index) => (
+
+              <div key={index}>
+
+                <a
+                  href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+
+                  <img
+                    src={video.snippet.thumbnails.medium.url}
+                    alt={video.snippet.title}
+                  />
+
+                  <p>{video.snippet.title}</p>
+
+                </a>
+
+              </div>
+
+            ))}
+
           </div>
 
-          {/* Display Related YouTube Videos for the Searched Recipe */}
-          {videoLinks.length > 0 && (
-            <div>
-              <h2>Related Videos</h2>
-              <div className="video-list">
-                {videoLinks.map((video, index) => (
-                  <div key={index}>
-                    <a href={`https://www.youtube.com/watch?v=${video.id.videoId}`} target="_blank" rel="noopener noreferrer">
-                      <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.title} />
-                      <p>{video.snippet.title}</p>
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
+
       )}
+
     </div>
   );
 };
