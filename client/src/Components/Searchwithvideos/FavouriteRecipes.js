@@ -5,7 +5,10 @@ const FavoriteRecipes = () => {
       const fetchFavorites = async () => {
         const token = localStorage.getItem("token");
         if (!token) return;
-        const response = await fetch(`http://localhost:5000/api/auth/get-favorites?token=${token}`);
+        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
+        const response = await fetch(`${baseUrl}/api/auth/get-favorites?token=${token}`);
+        //const response = await fetch(`http://localhost:5000/api/auth/get-favorites?token=${token}`);
         const data = await response.json();
         if (response.ok) {
           setFavorites(data.favoriteRecipes);

@@ -9,7 +9,25 @@ const Favorites = () => {
     window.location.href = "/login";
   };
 
-  useEffect(() => {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    fetch(`${API_BASE_URL}/api/auth/favorites?token=${token}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error fetching favorites");
+        }
+        return response.json();
+      })
+      .then((data) => setFavoriteRecipes(data.favoriteRecipes))
+      .catch((error) => alert(error.message));
+  }
+}, []);
+
+  /*useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       fetch(`http://localhost:5000/api/auth/favorites?token=${token}`)
@@ -22,7 +40,7 @@ const Favorites = () => {
         .then((data) => setFavoriteRecipes(data.favoriteRecipes))
         .catch((error) => alert(error.message));
     }
-  }, []);
+  }, []);*/
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
